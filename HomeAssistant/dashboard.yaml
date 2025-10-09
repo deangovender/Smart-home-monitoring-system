@@ -1,0 +1,76 @@
+views:
+  - path: default_view
+    title: Home
+    cards:
+      - type: weather-forecast
+        entity: weather.forecast_home
+        show_forecast: false
+      - type: entities
+        state_color: true
+        entities:
+          - binary_sensor.ml_anomaly
+          - binary_sensor.study_motion
+          - binary_sensor.study_occupancy
+        title: Binary sensors
+      - type: entities
+        state_color: true
+        entities:
+          - sensor.air_sample_time
+          - sensor.last_motion_event_time
+
+          - sensor.minutes_since_motion
+          - sensor.motion_event_type
+          - sensor.study_humidity
+          - sensor.study_temperature
+        title: Sensor
+      - type: grid
+        square: true
+        columns: 3
+        cards:
+          - type: picture-entity
+            entity: person.dean
+            aspect_ratio: '1'
+            show_name: false
+            image: >-
+              data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'
+              viewBox='0 0 50 50' width='50' height='50'
+              style='background-color:%23b3e5fc'%3E%3Cg%3E%3Ctext
+              font-family='roboto' x='50%25' y='50%25' text-anchor='middle'
+              stroke='%23212121' font-size='1.3em'
+              dy='.3em'%3ED%3C/text%3E%3C/g%3E%3C/svg%3E
+          - type: picture-entity
+            entity: person.lenovo
+            aspect_ratio: '1'
+            show_name: false
+            image: >-
+              data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'
+              viewBox='0 0 50 50' width='50' height='50'
+              style='background-color:%23b3e5fc'%3E%3Cg%3E%3Ctext
+              font-family='roboto' x='50%25' y='50%25' text-anchor='middle'
+              stroke='%23212121' font-size='1.3em'
+              dy='.3em'%3EL%3C/text%3E%3C/g%3E%3C/svg%3E
+      - type: media-control
+        entity: media_player.skyy
+      - show_name: true
+        show_icon: true
+        type: button
+        entity: input_boolean.study_override_internal
+        show_state: true
+      - type: entities
+        state_color: true
+        title: Study — Occupancy & Light
+        show_header_toggle: false
+        entities:
+          - entity: sensor.study_automation_status
+            name: Automation
+          - type: section
+            label: ML Occupancy
+          - entity: binary_sensor.study_occupancy_ml
+            name: Occupied (ML)
+            icon: mdi:account-clock
+          - entity: sensor.study_occupancy_probability
+            name: Occupancy Probability
+          - type: section
+            label: Light
+          - entity: switch.sonoff_10026284f1_1
+            name: Study Light
